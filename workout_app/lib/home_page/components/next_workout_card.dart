@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/video_info/video_info.dart';
 
 import '../../colors.dart';
 
@@ -72,20 +73,25 @@ class NextWorkoutCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(60),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: const Offset(4, 8),
-                            blurRadius: 15,
-                            color: AppColor.gradientFirst,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => VideoInfo()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(60),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(4, 8),
+                              blurRadius: 15,
+                              color: AppColor.gradientFirst,
 
-                          )
-                        ]
+                            )
+                          ]
+                      ),
+                      child: const Icon(Icons.play_circle_fill,
+                          size: 60, color: Colors.white),
                     ),
-                    child: const Icon(Icons.play_circle_fill,
-                        size: 60, color: Colors.white),
                   )
                 ],
               )
