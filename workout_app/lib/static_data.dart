@@ -45,84 +45,84 @@ class StaticData {
   static List<WorkoutVideoInfo> gluesWorkoutPlaylist() {
     return [
       WorkoutVideoInfo(
-        title: 'Squat and Walk',
+        title: 'Bottoms-up lunge',
         time: '45 seconds',
-        thumbnail: 'assets/legs/squat1.jpg',
-        videoUrl: 'oj4D4Nj63ic',
+        thumbnail: 'assets/glues/Bottoms-up lunge.jpg',
+        videoUrl: 'JhshtxGkjuU',
       ),
       WorkoutVideoInfo(
-        title: 'Plie Squat and Heel Raises',
+        title: 'Side skaters',
         time: '55 seconds',
-        thumbnail: 'assets/legs/squat2.jpg',
-        videoUrl: '6Rs7nSMWoKo',
+        thumbnail: 'assets/glues/Side skaters.jpg',
+        videoUrl: '4RuxhVJ4-pg',
       ),
       WorkoutVideoInfo(
-        title: 'Squat Kickback',
+        title: 'Glute bridge',
         time: '60 seconds',
-        thumbnail: 'assets/legs/squat3.jpg',
-        videoUrl: 'qTMM98FWRPU',
+        thumbnail: 'assets/glues/Glute bridge.jpg',
+        videoUrl: 'wPM8icPu6H8',
       ),
       WorkoutVideoInfo(
-        title: 'Squat with Side Leg Lift',
+        title: 'Chair squat jump',
         time: '120 seconds',
-        thumbnail: 'assets/legs/squat4.jpg',
-        videoUrl: 'OZoYxgT3DK0',
+        thumbnail: 'assets/glues/Chair squat jump.jpg',
+        videoUrl: 'vVpojWs8lQg',
       ),
     ];
   }
   static List<WorkoutVideoInfo> absWorkoutPlaylist() {
     return [
       WorkoutVideoInfo(
-        title: 'Squat and Walk',
+        title: 'Russian twist',
         time: '45 seconds',
-        thumbnail: 'assets/legs/squat1.jpg',
-        videoUrl: 'oj4D4Nj63ic',
+        thumbnail: 'assets/abs/Russian twist.jpg',
+        videoUrl: 'wkD8rjkodUI',
       ),
       WorkoutVideoInfo(
-        title: 'Plie Squat and Heel Raises',
+        title: 'Side plank with dips',
         time: '55 seconds',
-        thumbnail: 'assets/legs/squat2.jpg',
-        videoUrl: '6Rs7nSMWoKo',
+        thumbnail: 'assets/abs/Side plank with dips.jpg',
+        videoUrl: 'ibyUMvywMTc',
       ),
       WorkoutVideoInfo(
-        title: 'Squat Kickback',
+        title: 'Standing knee to hands',
         time: '60 seconds',
-        thumbnail: 'assets/legs/squat3.jpg',
-        videoUrl: 'qTMM98FWRPU',
+        thumbnail: 'assets/abs/Standing knee to hands.jpg',
+        videoUrl: 'YUpeReHQl_w',
       ),
       WorkoutVideoInfo(
-        title: 'Squat with Side Leg Lift',
+        title: 'Half sit up',
         time: '120 seconds',
-        thumbnail: 'assets/legs/squat4.jpg',
-        videoUrl: 'OZoYxgT3DK0',
+        thumbnail: 'assets/abs/Half sit up.jpg',
+        videoUrl: 's3PPU_2z9qo',
       ),
     ];
   }
   static List<WorkoutVideoInfo> armWorkoutPlaylist() {
     return [
       WorkoutVideoInfo(
-        title: 'Squat and Walk',
+        title: 'Barbell Bicep Curl',
         time: '45 seconds',
-        thumbnail: 'assets/legs/squat1.jpg',
-        videoUrl: 'oj4D4Nj63ic',
+        thumbnail: 'assets/arms/BARBELL BICEP CURL.jpg',
+        videoUrl: 'dDI8ClxRS04',
       ),
       WorkoutVideoInfo(
-        title: 'Plie Squat and Heel Raises',
+        title: 'Dumbbell Preacher Curl',
         time: '55 seconds',
-        thumbnail: 'assets/legs/squat2.jpg',
-        videoUrl: '6Rs7nSMWoKo',
+        thumbnail: 'assets/arms/DUMBBELL PREACHER CURL.jpg',
+        videoUrl: 'DoCWeUBA0Gs',
       ),
       WorkoutVideoInfo(
-        title: 'Squat Kickback',
+        title: 'Cable Bicep Curl',
         time: '60 seconds',
-        thumbnail: 'assets/legs/squat3.jpg',
-        videoUrl: 'qTMM98FWRPU',
+        thumbnail: 'assets/arms/CABLE BICEP CURL.jpg',
+        videoUrl: '85kXYq7Ssh4',
       ),
       WorkoutVideoInfo(
-        title: 'Squat with Side Leg Lift',
+        title: 'Skull Crusher Exercise',
         time: '120 seconds',
-        thumbnail: 'assets/legs/squat4.jpg',
-        videoUrl: 'OZoYxgT3DK0',
+        thumbnail: 'assets/arms/SKULL CRUSHER.jpg',
+        videoUrl: 'd_KZxkY_0cM',
       ),
     ];
   }
