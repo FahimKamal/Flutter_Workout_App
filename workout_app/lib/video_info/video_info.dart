@@ -8,18 +8,20 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'head_section.dart';
 
 class VideoInfo extends StatefulWidget {
-  const VideoInfo({Key? key}) : super(key: key);
+  const VideoInfo({Key? key, required this.workoutPlan,}) : super(key: key);
+
+  final WorkoutPlan workoutPlan;
 
   @override
   _VideoInfoState createState() => _VideoInfoState();
 }
 
 class _VideoInfoState extends State<VideoInfo> {
-  List videoPlaylist = StaticData.videoPlaylist;
+  List videoPlaylist = [];
 
   bool videoPlayerActive = false;
 
-  late final YoutubePlayerController _youtubeController;
+  YoutubePlayerController? _youtubeController;
   int videoIndex = 0;
 
   _playNext(){
@@ -27,8 +29,15 @@ class _VideoInfoState extends State<VideoInfo> {
       setState(() {
         videoIndex++;
       });
-      _youtubeController
+      _youtubeController!
           .load(videoPlaylist[videoIndex].videoUrl);
+    } else {
+      setState(() {
+        _youtubeController!.dispose();
+        _youtubeController = null;
+        videoPlayerActive = false;
+        Get.snackbar('Congratulations!!!', 'All video has been played.');
+      });
     }
   }
   _playPrevious(){
@@ -36,8 +45,23 @@ class _VideoInfoState extends State<VideoInfo> {
       setState(() {
         videoIndex--;
       });
-      _youtubeController
+      _youtubeController!
           .load(videoPlaylist[videoIndex].videoUrl);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.workoutPlan.title == 'Legs'){
+      videoPlaylist = StaticData.lagWorkoutPlaylist();
+    } else if(widget.workoutPlan.title == 'Glues'){
+      videoPlaylist = StaticData.gluesWorkoutPlaylist();
+    } else if(widget.workoutPlan.title == 'Abs'){
+      videoPlaylist = StaticData.absWorkoutPlaylist();
+    } else if(widget.workoutPlan.title == 'Arms'){
+      videoPlaylist = StaticData.armWorkoutPlaylist();
     }
   }
 
@@ -53,7 +77,7 @@ class _VideoInfoState extends State<VideoInfo> {
         ),
         child: Column(
           children: [
-            videoPlayerActive ? videoPlayerArea(context) : const HeadSection(),
+            videoPlayerActive ? videoPlayerArea(context) : HeadSection(workoutPlan: widget.workoutPlan),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -70,7 +94,7 @@ class _VideoInfoState extends State<VideoInfo> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Circuit 1: legs Toning',
+                            widget.workoutPlan.description,
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -114,7 +138,7 @@ class _VideoInfoState extends State<VideoInfo> {
                                   );
                                   videoPlayerActive = true;
                                 } else {
-                                  _youtubeController
+                                  _youtubeController!
                                       .load(videoPlaylist[index].videoUrl);
                                 }
                                 videoIndex = index;
@@ -174,7 +198,7 @@ class _VideoInfoState extends State<VideoInfo> {
           ),
           YoutubePlayer(
             width: MediaQuery.of(context).size.width,
-            controller: _youtubeController,
+            controller: _youtubeController!,
             showVideoProgressIndicator: true,
             onEnded: (data) {
               _playNext();

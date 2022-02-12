@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:workout_app/video_info/video_info.dart';
 
 import '../../colors.dart';
+import '../../static_data.dart';
 
 class NextWorkoutCard extends StatelessWidget {
   const NextWorkoutCard({
@@ -43,8 +44,7 @@ class NextWorkoutCard extends StatelessWidget {
               Text(
                 'Next workout',
                 style: TextStyle(
-                    fontSize: 16,
-                    color: AppColor.homePageContainerTextSmall),
+                    fontSize: 16, color: AppColor.homePageContainerTextSmall),
               ),
               const SizedBox(height: 5),
               Text(
@@ -63,8 +63,7 @@ class NextWorkoutCard extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.timer,
-                          size: 20,
-                          color: AppColor.homePageContainerTextSmall),
+                          size: 20, color: AppColor.homePageContainerTextSmall),
                       const SizedBox(width: 10),
                       Text(
                         '60 min',
@@ -75,8 +74,14 @@ class NextWorkoutCard extends StatelessWidget {
                     ],
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Get.to(() => const VideoInfo());
+                    onTap: () {
+                      Get.to(() => VideoInfo(
+                            workoutPlan: WorkoutPlan(
+                              title: 'Legs',
+                              description: 'Legs Workout',
+                              img: 'assets/ex3.png',
+                            ),
+                          ));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -86,10 +91,8 @@ class NextWorkoutCard extends StatelessWidget {
                               offset: const Offset(4, 8),
                               blurRadius: 15,
                               color: AppColor.gradientFirst,
-
                             )
-                          ]
-                      ),
+                          ]),
                       child: const Icon(Icons.play_circle_fill,
                           size: 60, color: Colors.white),
                     ),

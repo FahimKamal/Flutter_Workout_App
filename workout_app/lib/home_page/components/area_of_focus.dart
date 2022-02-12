@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:workout_app/video_info/video_info.dart';
 
 import '../../colors.dart';
 import '../../static_data.dart';
@@ -57,37 +59,42 @@ class WorkoutCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: 150,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 3,
-              offset: const Offset(5, 5),
-              color: AppColor.gradientSecond.withOpacity(0.1)),
-          BoxShadow(
-              blurRadius: 3,
-              offset: const Offset(-5, -5),
-              color: AppColor.gradientSecond.withOpacity(0.1)),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(workoutPlan.img, width: 100),
-            const SizedBox(height: 10),
-            Text(
-              workoutPlan.title,
-              style: TextStyle(
-                fontSize: 20,
-                color: AppColor.homePageDetail,
-              ),
-            ),
+    return InkWell(
+      onTap: (){
+        Get.to(() => VideoInfo(workoutPlan: workoutPlan));
+      },
+      child: Container(
+        // height: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 3,
+                offset: const Offset(5, 5),
+                color: AppColor.gradientSecond.withOpacity(0.1)),
+            BoxShadow(
+                blurRadius: 3,
+                offset: const Offset(-5, -5),
+                color: AppColor.gradientSecond.withOpacity(0.1)),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(workoutPlan.img, width: 100),
+              const SizedBox(height: 10),
+              Text(
+                workoutPlan.title,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: AppColor.homePageDetail,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
