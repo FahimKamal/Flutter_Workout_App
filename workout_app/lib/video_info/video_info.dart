@@ -1,9 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:dotted_line/dotted_line.dart';
+import 'package:get/get.dart';
 import 'package:workout_app/colors.dart';
 import 'package:workout_app/static_data.dart';
+import 'package:workout_app/video_info/workout_video_card.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'head_section.dart';
 
@@ -17,6 +17,30 @@ class VideoInfo extends StatefulWidget {
 class _VideoInfoState extends State<VideoInfo> {
   List videoPlaylist = StaticData.videoPlaylist;
 
+  bool videoPlayerActive = false;
+
+  late final YoutubePlayerController _youtubeController;
+  int videoIndex = 0;
+
+  _playNext(){
+    if(videoIndex < videoPlaylist.length - 1){
+      setState(() {
+        videoIndex++;
+      });
+      _youtubeController
+          .load(videoPlaylist[videoIndex].videoUrl);
+    }
+  }
+  _playPrevious(){
+    if(videoIndex > 0){
+      setState(() {
+        videoIndex--;
+      });
+      _youtubeController
+          .load(videoPlaylist[videoIndex].videoUrl);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +53,7 @@ class _VideoInfoState extends State<VideoInfo> {
         ),
         child: Column(
           children: [
-            const HeadSection(),
+            videoPlayerActive ? videoPlayerArea(context) : const HeadSection(),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -76,31 +100,30 @@ class _VideoInfoState extends State<VideoInfo> {
                         itemCount: videoPlaylist.length,
                         itemBuilder: (BuildContext context, int index) {
                           return WorkoutVideoCard(
-                              workoutVideoInfo: videoPlaylist[index]);
+                            workoutVideoInfo: videoPlaylist[index],
+                            onTap: () {
+                              debugPrint(
+                                  'Pressed Button index: ' + index.toString());
+                              setState(() {
+                                if(!videoPlayerActive){
+                                  _youtubeController = YoutubePlayerController(
+                                    initialVideoId: videoPlaylist[index].videoUrl,
+                                    flags: const YoutubePlayerFlags(
+                                      autoPlay: true,
+                                    ),
+                                  );
+                                  videoPlayerActive = true;
+                                } else {
+                                  _youtubeController
+                                      .load(videoPlaylist[index].videoUrl);
+                                }
+                                videoIndex = index;
+                              });
+                            },
+                          );
                         },
                         separatorBuilder: (BuildContext context, int index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 20),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 20,
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFeaeefc),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: const Center(
-                                    child: Text('30s rest', style: TextStyle(color: Color(0xFF839fed))),
-                                  ),
-                                ),
-
-                                const Expanded(
-                                  child: DottedLine(),
-                                ),
-                              ],
-                            ),
-                          );
+                          return const VideoCardSeparator();
                         },
                       ),
                     ),
@@ -113,50 +136,77 @@ class _VideoInfoState extends State<VideoInfo> {
       ),
     );
   }
-}
 
-class WorkoutVideoCard extends StatelessWidget {
-  const WorkoutVideoCard({
-    Key? key,
-    required this.workoutVideoInfo,
-  }) : super(key: key);
-
-  final WorkoutVideoInfo workoutVideoInfo;
-
-  @override
-  Widget build(BuildContext context) {
+  Container videoPlayerArea(BuildContext context) {
     return Container(
-      color: Colors.redAccent.withOpacity(0.2),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
+      width: MediaQuery.of(context).size.width,
+      // height: 300,
+      padding: const EdgeInsets.only(top: 40),
+      child: Column(
         children: [
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                  image: AssetImage(workoutVideoInfo.thumbnail),
-                  fit: BoxFit.cover),
+          // Top navigation
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  alignment: Alignment.centerLeft,
+                  icon: Icon(Icons.arrow_back_ios_outlined,
+                      size: 20, color: AppColor.secondPageIconColor),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Get.snackbar(
+                      'Pop up',
+                      'Function not implemented yet.',
+                      duration: const Duration(milliseconds: 1000),
+                    );
+                  },
+                  icon: Icon(Icons.info_outline,
+                      size: 20, color: AppColor.secondPageIconColor),
+                ),
+              ],
             ),
           ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                workoutVideoInfo.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          YoutubePlayer(
+            width: MediaQuery.of(context).size.width,
+            controller: _youtubeController,
+            showVideoProgressIndicator: true,
+            onEnded: (data) {
+              _playNext();
+            },
+            onReady: () {
+              setState(() {
+                // buttonEnabled = true;
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _playPrevious();
+                  },
+                  alignment: Alignment.centerLeft,
+                  icon: Icon(Icons.skip_previous,
+                      size: 50, color: AppColor.secondPageIconColor),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                workoutVideoInfo.time,
-                style: TextStyle(color: Colors.grey[500]),
-              )
-            ],
+                IconButton(
+                  onPressed: () {
+                    _playNext();
+                  },
+                  icon: Icon(Icons.skip_next,
+                      size: 50, color: AppColor.secondPageIconColor),
+                ),
+              ],
+            ),
           ),
         ],
       ),

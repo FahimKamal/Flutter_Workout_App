@@ -14,7 +14,7 @@ class WorkoutVideoInfo {
 }
 
 class StaticData {
-  static List videoPlaylist = [
+  static List<WorkoutVideoInfo> videoPlaylist = [
     WorkoutVideoInfo(
       title: 'Squat and Walk',
       time: '45 seconds',

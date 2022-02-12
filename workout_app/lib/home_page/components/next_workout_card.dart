@@ -76,7 +76,7 @@ class NextWorkoutCard extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.to(const VideoInfo());
+                      Get.to(() => const VideoInfo());
                     },
                     child: Container(
                       decoration: BoxDecoration(
