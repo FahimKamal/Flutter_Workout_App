@@ -3,10 +3,10 @@ class WorkoutPlan {
 
   WorkoutPlan({required this.title, required this.img});
 }
-class VideoInfo {
+class WorkoutVideoInfo {
   String title, time, thumbnail, videoUrl;
 
-  VideoInfo(
+  WorkoutVideoInfo(
       {required this.title,
       required this.time,
       required this.thumbnail,
@@ -15,29 +15,29 @@ class VideoInfo {
 
 class StaticData {
   static List videoPlaylist = [
-    VideoInfo(
+    WorkoutVideoInfo(
       title: 'Squat and Walk',
       time: '45 seconds',
       thumbnail: 'assets/squat1.jpg',
-      videoUrl: 'http://db.bslmeiyu.com/uploads/uploads/video/2021/08/21/1-%20Introduction.mp4',
+      videoUrl: 'oj4D4Nj63ic',
     ),
-    VideoInfo(
+    WorkoutVideoInfo(
       title: 'Plie Squat and Heel Raises',
       time: '55 seconds',
       thumbnail: 'assets/squat1.jpg',
-      videoUrl: 'https://img.bslmeiyu.com/uploads/20170706/The%20Bananas%20Song%20%20Counting%20Bananas%20%20Super%20Simple%20Songs.mp4',
+      videoUrl: '6Rs7nSMWoKo',
     ),
-    VideoInfo(
+    WorkoutVideoInfo(
       title: 'Squat Kickback',
       time: '60 seconds',
       thumbnail: 'assets/squat1.jpg',
-      videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      videoUrl: 'qTMM98FWRPU',
     ),
-    VideoInfo(
+    WorkoutVideoInfo(
       title: 'Squat with Side Leg Lift',
       time: '120 seconds',
       thumbnail: 'assets/squat1.jpg',
-      videoUrl: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      videoUrl: 'OZoYxgT3DK0',
     ),
   ];
 

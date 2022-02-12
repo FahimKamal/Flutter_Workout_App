@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:workout_app/video_info/video_info.dart';
 
 import '../../colors.dart';
@@ -75,7 +76,7 @@ class NextWorkoutCard extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => VideoInfo()));
+                      Get.to(const VideoInfo());
                     },
                     child: Container(
                       decoration: BoxDecoration(

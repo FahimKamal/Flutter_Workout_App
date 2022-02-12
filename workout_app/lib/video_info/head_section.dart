@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../colors.dart';
 
@@ -21,13 +22,21 @@ class HeadSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {Navigator.pop(context);},
+                onPressed: () {
+                  Get.back();
+                },
                 alignment: Alignment.centerLeft,
                 icon: Icon(Icons.arrow_back_ios_outlined,
                     size: 20, color: AppColor.secondPageIconColor),
               ),
               IconButton(
-                onPressed: () {Navigator.pop(context);},
+                onPressed: () {
+                  Get.snackbar(
+                    'Pop up',
+                    'Function not implemented yet.',
+                    duration: const Duration(milliseconds: 1000),
+                  );
+                },
                 icon: Icon(Icons.info_outline,
                     size: 20, color: AppColor.secondPageIconColor),
               ),
@@ -57,27 +66,24 @@ class HeadSection extends StatelessWidget {
                       ],
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
-                    )
-                ),
+                    )),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(Icons.timer,
-                        size: 20,
-                        color: AppColor.secondPageIconColor),
+                        size: 20, color: AppColor.secondPageIconColor),
                     Text(
                       '60 min',
                       style: TextStyle(
-                          fontSize: 14,
-                          color: AppColor.secondPageIconColor),
+                          fontSize: 14, color: AppColor.secondPageIconColor),
                     ),
                   ],
                 ),
               ),
               const SizedBox(width: 20),
               Container(
-                width: 220,
-                height: 30,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     gradient: LinearGradient(
@@ -87,26 +93,22 @@ class HeadSection extends StatelessWidget {
                       ],
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
-                    )
-                ),
+                    )),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(Icons.handyman_outlined,
-                        size: 20,
-                        color: AppColor.secondPageIconColor),
+                        size: 20, color: AppColor.secondPageIconColor),
                     Text(
                       'Resistant band, kettebell',
                       style: TextStyle(
-                          fontSize: 14,
-                          color: AppColor.secondPageIconColor),
+                          fontSize: 14, color: AppColor.secondPageIconColor),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-
         ],
       ),
     );
